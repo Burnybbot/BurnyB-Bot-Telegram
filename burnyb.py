@@ -45,7 +45,12 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "💳 Info su pagamenti e spedizioni"
         )
 
-def main():
+# --- NUOVA FUNZIONE PER SERVER.PY ---
+def run_bot():
+    """
+    Questa funzione avvia il bot. 
+    Serve a essere richiamata da server.py tramite threading.
+    """
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button))
@@ -53,5 +58,6 @@ def main():
     print("🔥 BurnyB è online su Render!")
     app.run_polling()
 
+# Il bot non parte automaticamente se importato
 if __name__ == "__main__":
-    main()
+    run_bot()
