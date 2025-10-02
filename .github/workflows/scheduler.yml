@@ -1,0 +1,29 @@
+name: BurnyB Scheduler
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # 09:00 italiane (UTC)
+    - cron: "0 23 * * *"  # 01:00 italiane (UTC)
+  workflow_dispatch:
+
+jobs:
+  control-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Accendi o spegni BurnyB
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" == "07" ]; then
+            railway up
+          else
+            railway down
+          fi
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
