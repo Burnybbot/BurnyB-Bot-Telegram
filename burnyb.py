@@ -2,8 +2,9 @@ import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
-TOKEN = "8308545854:AAFtPfCayh9AgiLZ2v8VgUt2mCak-JXlLqY"
-  # token BOT
+TOKEN = "8308545854:AAFtPfCayh9AgiLZ2v8VgUt2mCak-JXlLqY"  
+# token BOT
+
 # Messaggio di benvenuto
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
@@ -51,15 +52,14 @@ def run_bot():
     Questa funzione avvia il bot. 
     Serve a essere richiamata da server.py tramite threading.
     """
-        print("🔥 BurnyB sta partendo…")
+    print("🔥 BurnyB sta partendo…")
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button))
 
-    print("🔥 BurnyB è online su Render!")
+    print("🔥 BurnyB è online!")
     app.run_polling()
 
 # Il bot non parte automaticamente se importato
 if __name__ == "__main__":
     run_bot()
-
